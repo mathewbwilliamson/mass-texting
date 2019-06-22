@@ -15,6 +15,7 @@ const Columns = styled.div`
 const SignupPage = props => {
     // [matt]: When we arrive at this page and we are already logged in, redirect to another page?
     // Router.replace('/')
+    // [matt]: If Logged in, Display a message that says, NAME, you are already logged in!
     return (
         <BasicPageStyles>
             <Columns className="container">

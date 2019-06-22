@@ -6,6 +6,7 @@ export default () => {
     return (<div>
         <Header />
         <Link to="/sendAText">Send a Text</Link>
+        <Link to="/login">Login</Link>
         <div>Hello world</div>
     </div>)
 }

@@ -1,17 +1,27 @@
 import React from 'react'
 import axios from 'axios'
+import { navigate } from "gatsby"
+
 import Form from '../styles/Form'
 // import Error from './ErrorMessage'
 import {endpoint} from '../../config'
+import {userService} from '../_services/userServices'
 
 class Signin extends React.Component {
     constructor(props) {
         super(props)
+
+        userService.logout()
+
         this.state = {
             email: '',
             password: '',
+            submitted: false,
+            loading: false,
+            error: ''
         }
         this.saveToState = this.saveToState.bind(this)
+        this.handleSubmit = this.handleSubmit.bind(this)
     }
 
     saveToState(e) {
@@ -21,27 +31,34 @@ class Signin extends React.Component {
         return null
     }
 
+    handleSubmit(e) {
+        e.preventDefault();
+
+        this.setState({ submitted: true });
+        const { email, password, returnUrl } = this.state;
+
+        // stop here if form is invalid
+        if (!(email && password)) {
+            return;
+        }
+
+        this.setState({ loading: true });
+        userService.login(email, password)
+            .then(user => {
+                console.log('[matt] this.props.location', this.props.location)
+                console.log('[matt] user', user)
+                
+                // const { from } = this.props.location.state || { from: { pathname: "/" } };
+                // this.props.history.push(from);
+                navigate(`/sendAText`)
+            })
+            .catch(error => this.setState({ error, loading: false }))
+    }
+
     render() {
         return (
             <Form
-                method="POST"
-                onSubmit={async e => {
-                    e.preventDefault()
-                    axios.post(`${endpoint}/users/authenticate`, {
-                        username: this.state.email,
-                        password: this.state.password
-                    })
-                    .then(res => {
-                        console.log('[matt] res', res.data.token)
-                        
-                        this.setState({
-                            email: '',
-                            password: '',
-                        })
-                    })
-                    .catch(err => console.log('err', err)
-                    )
-                }}
+                onSubmit={this.handleSubmit}
             >
                 <fieldset 
                     // disabled={loading} aria-busy={loading}
