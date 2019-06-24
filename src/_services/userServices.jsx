@@ -12,7 +12,6 @@ export const isLoggedIn = () => {
     const user = window.localStorage.user
         ? JSON.parse(window.localStorage.user)
         : {}
-    console.log('[matt] user', user)
     
     return !!user.token
 }

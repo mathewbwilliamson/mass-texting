@@ -1,7 +1,7 @@
 **# TO DO LIST**
 - Create a basic front end for texting
 - Use hooks whenever possible
-- Create a login screen
+DONE - Create a login screen
 - Create a signup screen?? Or just do that manually?
 - Create some basic styling and steal liberally from the MathnasiumCTS app
 - Change the styling for the form

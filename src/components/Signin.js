@@ -45,9 +45,6 @@ class Signin extends React.Component {
         this.setState({ loading: true });
         userService.login(email, password)
             .then(user => {
-                console.log('[matt] this.props.location', this.props.location)
-                console.log('[matt] user', user)
-                
                 // const { from } = this.props.location.state || { from: { pathname: "/" } };
                 // this.props.history.push(from);
                 navigate(`/sendAText`)

@@ -1,4 +1,3 @@
-import React from "react"
 import PropTypes from "prop-types"
 import { navigate } from "gatsby"
 import { isLoggedIn } from "../_services/userServices"
@@ -13,7 +12,7 @@ const PleaseLogIn = (props) => {
 }
 
 PleaseLogIn.propTypes = {
-  component: PropTypes.any.isRequired,
+  component: PropTypes.any,
 }
 
 export default PleaseLogIn
