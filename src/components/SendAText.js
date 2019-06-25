@@ -1,6 +1,5 @@
 import React from 'react'
 import phone from 'phone'
-import axios from 'axios'
 import Form from '../styles/Form'
 import { navigate } from "gatsby"
 import {endpoint} from '../../config'
@@ -132,19 +131,25 @@ class SendAText extends React.Component {
             toPhoneNumbers: this.state.goodPhoneNumberArray,
         }
 
-        const userToken = JSON.parse(localStorage.getItem('user')).token
+        const authToken = JSON.parse(localStorage.getItem('user')).token
         // [matt]: Need auth headers to be attached
-        const requestOptions = {
-            method: 'POST', 
-            headers: { 'Content-Type': 'application/json'},
-            body: JSON.stringify({ sendATextInformation })
-        }
-        axios.defaults.headers.common['Authorization'] = userToken
-        console.log('[matt] ', axios.defaults.headers)
+        console.log('[matt] ', JSON.stringify(sendATextInformation))
+        
 
-        return fetch(`${endpoint}/sendSMS`, requestOptions)
+        return fetch(`${endpoint}/sendSMS`, {
+            method: 'POST', 
+            headers: { 
+                'Authorization': `Bearer ${authToken}`
+            },
+            body: JSON.stringify(sendATextInformation)
+        })
         .then(response => {
-            console.log('[matt] response', response)
+            console.log('[matt] response', response.json())
+        })
+        .catch(err => {
+            // [matt]: TODO If Err, should not go to follow up confirmation page
+            console.log('[matt] err', err)
+            
         })
     }
 
