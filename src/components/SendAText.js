@@ -72,10 +72,20 @@ class SendAText extends React.Component {
             }
         })
 
+        let formValid = this.state.formValid
+        let fieldValidationErrors = this.state.formErrors
+
+        if (goodPhoneNumberArray.length < 1) {
+            formValid = false
+            fieldValidationErrors.toPhoneNumbers = ' is invalid'
+        }
+
         this.setState(
             {
                 goodPhoneNumberArray,
-                badPhoneNumberArray
+                badPhoneNumberArray,
+                formValid,
+                formErrors: fieldValidationErrors
             }
         )
     }
@@ -84,10 +94,10 @@ class SendAText extends React.Component {
         let fieldValidationErrors = this.state.formErrors
         let phoneNumberValid = this.state.phoneNumberValid
         let messageValid = this.state.messageValid
-
+        
         switch (fieldName) {
             case 'message':
-                messageValid = !!fieldValue
+                messageValid = !!fieldValue && fieldValue.length < 160
                 fieldValidationErrors.message = messageValid
                     ? ''
                     : ' is invalid'
@@ -125,7 +135,7 @@ class SendAText extends React.Component {
         )
     }
 
-    submitTextInformation() {
+    async submitTextInformation() {
         const sendATextInformation = {
             message: this.state.message,
             toPhoneNumbers: this.state.goodPhoneNumberArray,
@@ -133,12 +143,14 @@ class SendAText extends React.Component {
 
         const authToken = JSON.parse(localStorage.getItem('user')).token
         // [matt]: Need auth headers to be attached
-        console.log('[matt] ', JSON.stringify(sendATextInformation))
+        console.log('[matt] ', sendATextInformation)
         
 
-        return fetch(`${endpoint}/sendSMS`, {
+        return await fetch(`${endpoint}/sendSMS`, {
             method: 'POST', 
             headers: { 
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',          
                 'Authorization': `Bearer ${authToken}`
             },
             body: JSON.stringify(sendATextInformation)
@@ -155,10 +167,11 @@ class SendAText extends React.Component {
 
     async handleSubmit(e) {
         e.preventDefault()
+
+        await this.validatePhone()
         if (!this.state.formValid) {
             return false
         }
-        await this.validatePhone()
         await this.submitTextInformation()
 
         this.setState({formSubmitted: true})
@@ -186,29 +199,37 @@ class SendAText extends React.Component {
                 <Form onSubmit={this.handleSubmit}>
                     <h1>Send A Mass Text</h1>
                     <p>If adding more than one phone number, use spaces in between the numbers</p>
-                    <label htmlFor="toPhoneNumber">Phone Number(s): </label>
-                    <input
+                    <fieldset>
+                        <label htmlFor="toPhoneNumber">
+                            Phone Number(s): <br />
+                            <span className={`${this.errorClass(
+                                this.state.formErrors.toPhoneNumbers
+                                )}`}>Please enter correct phone numbers</span>
+                        </label>
+                        <input
                         type="tel" // [matt]: CHANGE to something else
                         id="toPhoneNumbers"
                         name="toPhoneNumbers"
                         value={this.state.toPhoneNumbers}
                         onChange={this.handleChange}
-                        className={`${this.errorClass(
-                            this.state.formErrors.toPhoneNumbers
-                        )}`}
-                    />
-                    <label htmlFor="message">Message: </label>
-                    <textarea
-                        type="textarea"
-                        id="message"
-                        name="message"
-                        value={this.state.message}
-                        onChange={this.handleChange}
-                        className={`${this.errorClass(
+                        />
+                    </fieldset>
+                    <fieldset>
+                        <label htmlFor="message">
+                            Message: <br />
+                        <span className={`${this.errorClass(
                             this.state.formErrors.message
-                        )}`}
-                    >
-                    </textarea>
+                            )}`}>Please enter a message</span>
+                        </label>
+                        <textarea
+                            type="textarea"
+                            id="message"
+                            name="message"
+                            value={this.state.message}
+                            onChange={this.handleChange}
+                            >
+                        </textarea>
+                    </fieldset>
                     <button type="submit">Send the Text!</button>
                 </Form>
             </div>

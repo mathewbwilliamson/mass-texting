@@ -1,4 +1,5 @@
 import React from 'react'
+import SendATextConfirmationStyles from '../styles/sendATextConfirmationStyles';
 
 // [matt]: Need to do all formatting and CSS
 const SendATextConfirmation = (props) => {
@@ -7,7 +8,7 @@ const SendATextConfirmation = (props) => {
     const message = props.passedInState.message
 
     return (
-        <div>
+        <SendATextConfirmationStyles>
             <h1>Text Was Sent</h1>
             <div>
                 The following phone numbers recieved a text message:
@@ -25,7 +26,7 @@ const SendATextConfirmation = (props) => {
                     {badPhoneNumberArray.map((phoneNumber, idx) => <li key={idx}>{phoneNumber}</li>)}
                 </ul>
             </div>}
-        </div>
+        </SendATextConfirmationStyles>
     )
 }
 

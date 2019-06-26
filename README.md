@@ -2,10 +2,10 @@
 - Create a basic front end for texting
 - Use hooks whenever possible
 DONE - Create a login screen
-- Create a signup screen?? Or just do that manually?
+DONE - Create a signup screen?? Or just do that manually?
 - Create some basic styling and steal liberally from the MathnasiumCTS app
 - Change the styling for the form
-- Hook up the Send a Text form and get it texting/working
+DONE - Hook up the Send a Text form and get it texting/working
 - How do I create a header and footer without adding it to every page?
 
 **# Twilio Account is using sgs@g email address**

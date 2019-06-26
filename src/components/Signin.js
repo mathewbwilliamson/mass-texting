@@ -1,10 +1,7 @@
 import React from 'react'
-import axios from 'axios'
 import { navigate } from "gatsby"
 
 import Form from '../styles/Form'
-// import Error from './ErrorMessage'
-import {endpoint} from '../../config'
 import {userService} from '../_services/userServices'
 
 class Signin extends React.Component {
@@ -35,7 +32,7 @@ class Signin extends React.Component {
         e.preventDefault();
 
         this.setState({ submitted: true });
-        const { email, password, returnUrl } = this.state;
+        const { email, password } = this.state;
 
         // stop here if form is invalid
         if (!(email && password)) {

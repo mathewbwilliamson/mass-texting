@@ -20,7 +20,11 @@ const Form = styled.form`
     font-size: 1.5rem;
     line-height: 1.5;
     font-weight: 600;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     label {
+        align-self: flex-start;
         display: block;
         margin-bottom: 1rem;
     }
@@ -47,9 +51,14 @@ const Form = styled.form`
         vertical-align: center;
     }
 
-    .has-error + span:after {
-        position: absolute;
-        content: '✖';
+    .no-error {
+        display: none;
+    }
+
+    .has-error{
+        display: block;
+        margin-top: -3px;
+        font-size: 0.9rem;
         padding-left: 5px;
         color: #8b0000;
     }
@@ -71,6 +80,7 @@ const Form = styled.form`
     fieldset {
         border: 0;
         padding: 0;
+        width: 50%;
 
         &[disabled] {
             opacity: 0.5;
