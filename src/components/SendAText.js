@@ -144,9 +144,8 @@ class SendAText extends React.Component {
         const authToken = JSON.parse(localStorage.getItem('user')).token
         // [matt]: Need auth headers to be attached
         console.log('[matt] ', sendATextInformation)
-        
 
-        return await fetch(`${endpoint}/sendSMS`, {
+        await fetch(`${endpoint}/sendSMS`, {
             method: 'POST', 
             headers: { 
                 'Accept': 'application/json',
@@ -156,6 +155,11 @@ class SendAText extends React.Component {
             body: JSON.stringify(sendATextInformation)
         })
         .then(response => {
+            if (!response.ok) {
+                throw Error(response.statusText)
+            } else {
+                this.setState({formSubmitted: true})
+            }
             console.log('[matt] response', response.json())
         })
         .catch(err => {
@@ -172,11 +176,11 @@ class SendAText extends React.Component {
         if (!this.state.formValid) {
             return false
         }
+
         await this.submitTextInformation()
 
-        this.setState({formSubmitted: true})
-
-        navigate(
+        if (this.state.formSubmitted) {
+            navigate(
             `/sendATextConfirmation`, 
             {
                 state: {
@@ -185,7 +189,16 @@ class SendAText extends React.Component {
                     message: this.state.message
                 }
             }
-        )
+            )
+        } else {
+            let fieldValidationErrors = this.state.formErrors
+            fieldValidationErrors.toPhoneNumbers = ' is invalid'
+            this.setState(
+                {
+                    formErrors: fieldValidationErrors,
+                })
+        }
+        
         
     }
 

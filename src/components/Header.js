@@ -1,14 +1,16 @@
 import React from 'react'
 import {Link} from 'gatsby'
+import HeaderStyles from '../styles/HeaderStyles'
 
-// [matt]: Create a Logo, a login/logout button, Links SendAText
 const Header = () => {
+    const user = localStorage.getItem('user')
+
     return (
-        <div>    
-            <div>This is the header</div>
-            <Link to="/login">Login</Link><br />
+        <HeaderStyles>    
+            {!user && <Link to="/login">Login</Link>}
+            {user && <Link to="/logout">Logout</Link>}
             <Link to="/sendAText">Send a Text</Link>
-        </div>
+        </HeaderStyles>
     )
 }
 
