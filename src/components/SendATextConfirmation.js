@@ -1,5 +1,5 @@
 import React from 'react'
-import SendATextConfirmationStyles from '../styles/sendATextConfirmationStyles';
+import SendATextConfirmationStyles from '../styles/SendATextConfirmationStyles';
 
 // [matt]: Need to do all formatting and CSS
 const SendATextConfirmation = (props) => {
