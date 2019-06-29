@@ -111,7 +111,11 @@ const Form = styled.form`
     }
 
     @media screen and (max-width: 600px) {
-            text-align: center;
+        text-align: center;
+        
+        textarea {
+            height: 100px;
+        }
     }
 `
 
