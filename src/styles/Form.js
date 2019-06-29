@@ -27,6 +27,7 @@ const Form = styled.form`
         align-self: flex-start;
         display: block;
         margin-bottom: 1rem;
+        margin-top: 1.5rem;
     }
     input,
     textarea,
@@ -100,6 +101,17 @@ const Form = styled.form`
             background-size: 50% auto;
             animation: ${loading} 0.5s linear infinite;
         }
+        @media screen and (max-width: 600px){
+            width: 100%;
+            
+            input, textarea {
+                width: 93%;
+            }
+        }
+    }
+
+    @media screen and (max-width: 600px) {
+            text-align: center;
     }
 `
 
