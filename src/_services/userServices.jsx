@@ -1,12 +1,7 @@
 import {endpoint} from '../../config';
 import { authHeader } from '../_helpers/auth-header';
 
-export const userService = {
-    login,
-    logout,
-    getAll,
-    isLoggedIn
-}
+// Matt: Note that all if(window) is because gatsby won't build if it doesn't know what localStorage is
 
 export const getLocalStorageObject = () => {
     if (typeof window !== 'undefined' && window && window.localStorage) {

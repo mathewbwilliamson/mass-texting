@@ -1,1 +1,1 @@
-export const endpoint = 'https://mathnasium-mass-text.herokuapp.com/' || `http://localhost:4444`
+export const endpoint = 'https://mathnasium-mass-text.herokuapp.com' || `http://localhost:4444`
