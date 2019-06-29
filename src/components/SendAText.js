@@ -179,8 +179,8 @@ class SendAText extends React.Component {
 
         await this.submitTextInformation()
 
-        if (this.state.formSubmitted) {
-            navigate(
+        if (this.state.formSubmitted && typeof window !== 'undefined') {
+          navigate(
             `/sendATextConfirmation`, 
             {
                 state: {

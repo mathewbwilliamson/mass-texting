@@ -1,9 +1,10 @@
 import React from 'react'
 import {Link} from 'gatsby'
 import HeaderStyles from '../styles/HeaderStyles'
+import {getUserData} from '../_services/userServices'
 
 const Header = () => {
-    const user = localStorage.getItem('user')
+    const user = getUserData()
 
     return (
         <HeaderStyles>    

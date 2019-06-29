@@ -8,15 +8,37 @@ export const userService = {
     isLoggedIn
 }
 
+export const getLocalStorageObject = () => {
+    if (typeof window !== 'undefined' && window && window.localStorage) {
+        return window.localStorage
+    } else {
+        return null
+    }
+}
+
 export const isLoggedIn = () => {
-    const user = window.localStorage.user
+    const user = getUserData()
         ? JSON.parse(window.localStorage.user)
         : {}
     
     return !!user.token
 }
 
-function login(username, password) {
+export const getUserData = () => {
+    const localStorageObj = getLocalStorageObject()
+
+    if (localStorageObj) {
+        const user = JSON.parse(localStorageObj.getItem('user'));
+        return user
+    } else {
+        return null
+    }
+}
+
+export const login = (username, password) => {
+    const localStorageObj = getLocalStorageObject()
+    if (!localStorageObj || typeof window === 'undefined' || !window) return null
+
     const requestOptions = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -31,19 +53,22 @@ function login(username, password) {
                 // store user details and basic auth credentials in local storage 
                 // to keep user logged in between page refreshes
                 user.authdata = window.btoa(username + ':' + password);
-                localStorage.setItem('user', JSON.stringify(user));
+                localStorageObj.setItem('user', JSON.stringify(user));
             }
 
             return user;
         });
 }
 
-function logout() {
+export const logout = () => {
     // remove user from local storage to log user out
-    localStorage.removeItem('user');
+    const localStorageObj = getLocalStorageObject()
+    if (localStorageObj) {
+        localStorageObj.removeItem('user');
+    }
 }
 
-function getAll() {
+export const getAll = () => {
     const requestOptions = {
         method: 'GET',
         headers: authHeader()
@@ -52,7 +77,7 @@ function getAll() {
     return fetch(`${endpoint}/users`, requestOptions).then(handleResponse);
 }
 
-function handleResponse(response) {
+export const handleResponse = (response) => {
     return response.text().then(text => {
         const data = text && JSON.parse(text);
         if (!response.ok) {

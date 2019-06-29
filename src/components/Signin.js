@@ -2,13 +2,13 @@ import React from 'react'
 import { navigate } from "gatsby"
 
 import Form from '../styles/Form'
-import {userService} from '../_services/userServices'
+import {login, logout} from '../_services/userServices'
 
 class Signin extends React.Component {
     constructor(props) {
         super(props)
 
-        userService.logout()
+        logout()
 
         this.state = {
             email: '',
@@ -40,11 +40,13 @@ class Signin extends React.Component {
         }
 
         this.setState({ loading: true });
-        userService.login(email, password)
+        login(email, password)
             .then(user => {
                 // const { from } = this.props.location.state || { from: { pathname: "/" } };
                 // this.props.history.push(from);
-                navigate(`/sendAText`)
+                if (typeof window !== 'undefined') {
+                    navigate(`/sendAText`)
+                }
             })
             .catch(error => this.setState({ error, loading: false }))
     }
