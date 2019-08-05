@@ -97,7 +97,7 @@ class SendAText extends React.Component {
         
         switch (fieldName) {
             case 'message':
-                messageValid = !!fieldValue && fieldValue.length < 160
+                messageValid = !!fieldValue && fieldValue.length
                 fieldValidationErrors.message = messageValid
                     ? ''
                     : ' is invalid'

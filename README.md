@@ -1,5 +1,5 @@
 **# TO DO LIST**
-- Create a basic front end for texting
+DONE - Create a basic front end for texting
 - Use hooks whenever possible
 DONE - Create a login screen
 DONE - Create a signup screen?? Or just do that manually?
@@ -8,8 +8,23 @@ DONE - Create a signup screen?? Or just do that manually?
 DONE - Hook up the Send a Text form and get it texting/working
 - How do I create a header and footer without adding it to every page?
 
-**# Twilio Account is using sgs@g email address**
+**# Twilio Account is using matt@math email address**
+-Email for Autumn and Julie-
+Hi All!
+I have completed the mass texting service. Full details in this email. When you send a text, each text costs money but not so much you'll have to worry too much about the cost. 
 
+Each message, inbound or outbound, costs $0.00750 so if you send/receive 50 messages per week, then you'd only spend $1.50 per month. The cost of the phone number itself is $1 so the total cost is $2.50 per month for something we can customize to our needs. Awesome! 
+
+Information: 
+URL: https://mathnasium-mass-texting.netlify.com
+Username: 
+Password: 
+
+Definitely be sure to add that username and password to your saved passwords when Google Chrome asks you to. Right now, there is no easy way to reset a password but I plan on making that soon. I just wanted to get this out to you in all of its ugly glory.
+
+When you login, click on Send a Text. Put some phone numbers in there seperated by spaces (copying and pasting should work). Type in a message and hit send. If it works, you'll get a confirmation. I suggest adding your phone numbers in the list of phone numbers to know that it sent correctly.
+
+The styling is bad so I plan on making better versions of that soon. In the meantime, please send me bugs as you see them, and I'll try to fix them. If you have any suggestions or improvements, let me know! 
 
 
 
