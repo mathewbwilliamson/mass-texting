@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "axios": "^0.19.0",
-    "gatsby": "^2.9.11",
+    "gatsby": "^2.32.13",
     "phone": "^2.3.16",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
